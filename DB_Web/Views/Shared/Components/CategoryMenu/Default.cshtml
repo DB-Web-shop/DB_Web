@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Category>
+<div class="dropdown">
+    <a class="text-reset me-3 dropdown-toggle hidden-arrow"
+       href="collection.jsp"
+       id="navbarDropdownMenuLink"
+       role="button"
+       data-mdb-toggle="dropdown"
+       aria-expanded="false">
+        <i class="fas fa-sitemap"></i>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end"
+        aria-labelledby="navbarDropdownMenuLink">
+        <li>
+            <a style="background-color: red; color: white;    font-weight: 600;" class="dropdown-item" asp-action="collection" asp-controller="home" asp-route-msp="all">TẤT CẢ SẢN PHẨM</a>
+        </li>
+        @foreach(var item in Model)
+        {
+            <li>
+                <a class="dropdown-item" asp-action="collection" asp-controller="home" asp-route-msp="@item.Id">@item.Tenloai</a>
+            </li>
+        }
+    </ul>
+</div>

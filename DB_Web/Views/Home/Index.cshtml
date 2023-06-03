@@ -1,0 +1,204 @@
+﻿@{
+    Layout = "~/Views/Home/Shared/_Layout.cshtml";
+    ViewBag.Title = "Trang chủ";
+    double giagiam=0;
+}
+@model List<Book>
+
+@await Component.InvokeAsync("Carousel")
+<!-- Section-->
+<section class="py-5">
+    <center><a href="collection?categoryid=4"><h3>SÁCH MỚI</h3></a></center>
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            @{int i = 0;}
+            @foreach (var item in Model)
+            {
+                if (i < 4)
+                {
+                    <div class="col mb-5">
+                        <a asp-action="product" asp-controller="home" asp-route-masp="@item.Id">
+                            <div class="card h-100">
+                                <!-- Sale badge-->
+                                @if (@item.StatusId == 1)
+                                {
+                                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; left:  0.5rem">Hết hàng</div>
+                                }
+                                else if (@item.StatusId == 3)
+                                {
+                                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; left:  0.5rem">Đặt trước</div>
+                                }
+                                @if (@item.Giamgia != null)
+                                {
+                                    giagiam = (double)(item.Giaban - (item.Giaban * item.Giamgia / 100));
+
+                                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">-@item.Giamgia%</div>
+                                }
+                                <!-- Product image-->
+                                <img style="height: 260px;" class="card-img-top" src="~/@item.Image" alt="..." />
+                                <!-- Product details-->
+                                <div class="card-body p-4">
+                                    <div class="text-center">
+                                        <!-- Product name-->
+                                        <h5 style="display: -webkit-box;
+                                                    -webkit-line-clamp: 2;
+                                                    -webkit-box-orient: vertical;
+                                                    overflow: hidden;" class="fw-bolder">
+                                            @item.Tensach
+                                        </h5>
+                                        <!-- Product reviews-->
+                                        <div class="d-flex justify-content-center small text-warning mb-2">
+                                            <div class="bi-star-fill"></div>
+                                            <div class="bi-star-fill"></div>
+                                            <div class="bi-star-fill"></div>
+                                            <div class="bi-star-fill"></div>
+                                            <div class="bi-star-fill"></div>
+                                        </div>
+                                        <!-- Product price-->
+                                        <span class="text-muted text-decoration-line-through">@item.Giaban.ToString("###,###")₫</span>
+                                        @giagiam.ToString("###,###") ₫
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    i++;
+                }
+                else
+                {
+                    
+                    break;
+                }
+            }
+        </div>
+    </div>
+
+    <center><a href="collection?categoryid=4"><h3>Manga - Comic</h3></a></center>
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            @{i = 0;}
+            @foreach (var item in Model)
+            {
+                if (i < 4 && item.CategoryId == 2)
+                {
+                    <div class="col mb-5">
+                        <a asp-action="product" asp-controller="home" asp-route-masp="@item.Id">
+                            <div class="card h-100">
+                                <!-- Sale badge-->
+                                @if (@item.StatusId == 1)
+                                {
+                                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; left:  0.5rem">Hết hàng</div>
+                                }
+                                else if (@item.StatusId == 3)
+                                {
+                                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; left:  0.5rem">Đặt trước</div>
+                                }
+                                @if (@item.Giamgia != null)
+                                {
+
+                                    giagiam = (double)(item.Giaban - (item.Giaban * item.Giamgia / 100));
+                                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">-@item.Giamgia%</div>
+                                }
+                                <!-- Product image-->
+                                <img style="height: 260px;" class="card-img-top" src="~/@item.Image" alt="..." />
+                                <!-- Product details-->
+                                <div class="card-body p-4">
+                                    <div class="text-center">
+                                        <!-- Product name-->
+                                        <h5 style="display: -webkit-box;
+                                                    -webkit-line-clamp: 2;
+                                                    -webkit-box-orient: vertical;
+                                                    overflow: hidden;" class="fw-bolder">
+                                            @item.Tensach
+                                        </h5>
+                                        <!-- Product reviews-->
+                                        <div class="d-flex justify-content-center small text-warning mb-2">
+                                            <div class="bi-star-fill"></div>
+                                            <div class="bi-star-fill"></div>
+                                            <div class="bi-star-fill"></div>
+                                            <div class="bi-star-fill"></div>
+                                            <div class="bi-star-fill"></div>
+                                        </div>
+                                        <!-- Product price-->
+                                        <span class="text-muted text-decoration-line-through">@item.Giaban.ToString("###,###")₫</span>
+                                        @giagiam.ToString("###,###") ₫
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    i++;
+                }
+                if (i > 4)
+                {
+                    break;
+                }
+            }
+        </div>
+    </div>
+
+    <center><a href="collection?categoryid=4"><h3>Văn học Việt Nam</h3></a></center>
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            @{
+                i = 0;
+            }
+            @foreach (var item in Model)
+            {
+                if (i < 4 && item.CategoryId == 4)
+                {
+                    <div class="col mb-5">
+                        <a asp-action="product" asp-controller="home" asp-route-masp="@item.Id">
+                            <div class="card h-100">
+                                <!-- Sale badge-->
+                                @if (@item.StatusId == 1)
+                                {
+                                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; left:  0.5rem">Hết hàng</div>
+                                }
+                                else if (@item.StatusId == 3)
+                                {
+                                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; left:  0.5rem">Đặt trước</div>
+                                }
+                                @if (@item.Giamgia != null)
+                                {
+                                    giagiam = (double)(item.Giaban - (item.Giaban * item.Giamgia / 100));
+                                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">-@item.Giamgia%</div>
+                                }
+                                <!-- Product image-->
+                                <img style="height: 260px;" class="card-img-top" src="~/@item.Image" alt="..." />
+                                <!-- Product details-->
+                                <div class="card-body p-4">
+                                    <div class="text-center">
+                                        <!-- Product name-->
+                                        <h5 style="display: -webkit-box;
+                                                    -webkit-line-clamp: 2;
+                                                    -webkit-box-orient: vertical;
+                                                    overflow: hidden;" class="fw-bolder">
+                                            @item.Tensach
+                                        </h5>
+                                        <!-- Product reviews-->
+                                        <div class="d-flex justify-content-center small text-warning mb-2">
+                                            <div class="bi-star-fill"></div>
+                                            <div class="bi-star-fill"></div>
+                                            <div class="bi-star-fill"></div>
+                                            <div class="bi-star-fill"></div>
+                                            <div class="bi-star-fill"></div>
+                                        </div>
+                                        <!-- Product price-->
+                                        <span class="text-muted text-decoration-line-through">@item.Giaban.ToString("###,###")₫</span>
+                                        @giagiam.ToString("###,###") ₫
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    i++;
+                }
+                if (i > 4)
+                {
+                    break;
+                }
+            }
+        </div>
+    </div>
+</section>

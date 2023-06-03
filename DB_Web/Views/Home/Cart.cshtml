@@ -1,0 +1,100 @@
+﻿@{
+    Layout = "~/Views/Home/Shared/_Layout.cshtml";
+    ViewBag.Title = "Giỏ hàng";
+}
+
+<section class="h-100" style="background-color: #eee;">
+    <div class="container h-100 py-5">
+        <div style="width: fit-content;
+                     margin-left: 9%;
+                     margin-bottom:  2%;">
+                    <a style="text-decoration: none;" href="home">
+                        <h6><i class="fa fa-long-arrow-left" ></i>&nbsp;Trở lại</h6>
+                    </a>
+                </div>
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-10">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h3 class="fw-normal mb-0 text-black">Giỏ hàng</h3>
+                        </div>
+                <div class="card rounded-3 mb-4">
+                    <div class="card-body p-4">
+                        <div class="row d-flex justify-content-between align-items-center">
+                            <div class="col-md-2 col-lg-2 col-xl-2">
+                                <img src="/img/anh-id5.webp"
+                                     class="img-fluid rounded-3" alt="Cotton T-shirt">
+                            </div>
+                            <div class="col-md-3 col-lg-3 col-xl-3">
+                                <p class="lead fw-normal mb-2">Giải mã 12 chòm sao</p>
+                            </div>
+                            <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                                <button class="btn btn-link px-2"
+                                        onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+
+                                <input id="form1" min="0" name="quantity" value="2" type="number"
+                                       class="form-control form-control-sm" />
+
+                                <button class="btn btn-link px-2"
+                                        onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                            <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                                <h5 class="mb-0">$499.00</h5>
+                            </div>
+                            <div style="display: contents; margin-top: 0.5%" class="col-md-1 col-lg-1 col-xl-1 text-end">
+                                <input name="select" type="checkbox" value="${giohang.book.id}" />
+                                <a href="#!" class="text-danger"><i class="fas fa-trash fa-lg"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-4">
+                    <div style="justify-content: flex-end;" class="card-body p-4 d-flex flex-row">
+
+                        <button onclick="updatecarts()" type="button" class="btn btn-outline-warning btn-lg ms-3">Cập nhật giỏ hàng</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <button onclick="check()" type="submit" class="btn btn-warning btn-block btn-lg">Thanh toán</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+<script language="javascript">
+    function check() {
+        var checkbox = document.getElementsByName('select');
+        var quantity = document.getElementsByName('quantity');
+        var result = "0thdzvkl0";
+        for (var i = 0; i < checkbox.length; i++) {
+            if (checkbox[i].checked === true) {
+                result += 'tdz' + checkbox[i].value + 'thdzvkl' + quantity[i].value;
+            }
+        }
+        if (result === "0thdzvkl0") {
+            alert("cuối đầu bài");
+        } else {
+            window.location = "/checkout?order=" + result;
+        }
+    }
+    function updatecarts() {
+        var checkbox = document.getElementsByName('select');
+        var quantity = document.getElementsByName('quantity');
+        var result = "0:0";
+        for (var i = 0; i < checkbox.length; i++) {
+            result += ',' + checkbox[i].value + ':' + quantity[i].value;
+        }
+        window.location = "updatecarts?sql=" + result;
+    }
+
+
+</script>
+

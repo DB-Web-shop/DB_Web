@@ -1,0 +1,144 @@
+﻿@{
+    Layout = "~/Views/Home/Shared/_Layout.cshtml";
+    ViewBag.Title = "Sản phẩm";
+}
+@model Book
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v16.0&appId=308936717220243&autoLogAppEvents=1" nonce="IAl5ngUV"></script>
+<c:set var="book" value="${requestScope.book}"></c:set>
+<form action="add" method="post">
+    <section class="py-5">
+        <a style="text-decoration: none; cursor: pointer; color: #386bc0" onclick="history.back()">
+            <h6 style="margin-left: 13%"><i class="fa fa-long-arrow-left"></i>&nbsp;Trở lại</h6>
+        </a>
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="row gx-4 gx-lg-5 align-items-center">
+
+                <div class="col-md-6">
+
+                    <center class="the ">
+                        <div class="badge bg-dark text-white position-absolute" style="margin: 1%;">-@Model.Giamgia%</div>
+                        <img class="card-img-top mb-5 mb-md-0" src="~/@Model.Image" alt="..." style="
+                                     height: 8%;
+                                     width: 70%;">
+                    </center>
+                </div>
+
+                <div class="col-md-6">
+
+                    <div class="small mb-1">MÃ SÁCH: @Model.Id </div>
+                    <h1 style="font-size: 2rem;" class="display-5 fw-bolder">@Model.Tensach</h1>
+                    <div class="fs-5 mb-5">
+                        <span class="text-decoration-line-through">@Model.Giaban.ToString("###,###")₫</span>
+                        <span style="color: red;">@((Model.Giaban - Model.Giaban * Model.Giamgia / 100).ToString())₫</span>
+                    </div>
+                    <p class="lead">Tác giả: <a href="#" style="color: red;font-weight: 500;"> @Model.IdtacgiaNavigation.TenTacGia</a></p>
+                    <p class="lead">Định dạng: @Model.Dinhdang</p>
+                    <p class="lead">Trọng lượng: @Model.Trongluong.ToString("###,###") gram</p>
+                    <p class="lead">Thể loại: <a href="collection?categoryid=${book.category.id}" style="color: red; font-weight: 500;"> @Model.Category.Tenloai</a></p>
+
+                    <div class="d-flex">
+                        <input type="hidden" class="text-center" readonly name="bookid" value="${book.id}" />
+                        <input name="soluong" class="form-control text-center me-3" id="inputQuantity" min="1" pattern="[-+]?[0-99]" type="number" value="1" style="max-width: 5rem" />
+                        <c:if test="${book.soluong > 2&&book.stt==5}">
+                            <input value="Thêm vào giỏ hàng" class="btn btn-outline-dark flex-shrink-0" type="submit" />
+                        </c:if>
+                        <c:if test="${book.soluong <=2||book.stt==4}">
+                            <input value="Tạm hết hàng" class="btn btn-outline-dark flex-shrink-0" disabled="disabled" type="submit" />
+                        </c:if>
+                    </div>
+                </div>
+            </div>
+        </div>
+         <div class="col-xs-9">
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-10">
+                    <div class="card">
+                        <div class="card-body m-3">
+                            <div class="row">
+                                <div >
+                                    <p class="fw-bold lead mb-2 ">Mô tả</p>
+                                    <p class="text-muted fw-light mb-4">
+                                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Id quam sapiente
+                                        molestiae numquam quas, voluptates omnis nulla ea odio quia similique
+                                        corrupti magnam.
+                                    </p>
+                                    <p class="text-muted fw-light mb-4">
+                                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Id quam sapiente
+                                        molestiae numquam quas, voluptates omnis nulla ea odio quia similique
+                                        corrupti magnam.
+                                    </p>
+                                    <p class="text-muted fw-light mb-4">
+                                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Id quam sapiente
+                                        molestiae numquam quas, voluptates omnis nulla ea odio quia similique
+                                        corrupti magnam.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+         </div>
+    </section>
+</form>
+
+<section class="py-5 bg-light">
+    <div class="container px-4 px-lg-5 mt-5">
+        <h2 class="fw-bolder mb-4">Bình luận</h2>
+        <div class="fb-comments" data-href="https://www.facebook.com/permalink.php?story_fbid=3350950245221293&id=100084687950939&substory_index=3350950245221293" data-numposts="5"></div>
+    </div>
+</section>
+<!-- Related items section-->
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <h2 class="fw-bolder mb-4"> Sách liên quan</h2>
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            <c:set var="i" value="0"></c:set>
+            <c:forEach items="${sessionScope.listBook}" var="cc">
+                <c:if test="${cc.category.id ==book.category.id && i<4}">
+                    <c:set var="i" value="${i+1}"></c:set>
+                    <div class="col mb-5">
+                        <a href="product?id=${cc.id}">
+                            <div class="card h-100">
+                                <!-- Sale badge-->
+                                <c:if test="${cc.soluong <=2}">
+                                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; left:  0.5rem">Hết hàng</div>
+                                </c:if>
+                                <c:if test="${cc.stt ==3}">
+                                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; left:  0.5rem">Đặt trước</div>
+                                </c:if>
+                                <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">-${cc.giamgia}%</div>
+                                <!-- Product image-->
+                                <img style="height: 260px;" class="card-img-top" src="${cc.img}" alt="..." />
+                                <!-- Product details-->
+                                <div class="card-body p-4">
+                                    <div class="text-center">
+                                        <!-- Product name-->
+                                        <h5 style="display: -webkit-box;
+                                                    -webkit-line-clamp: 2;
+                                                    -webkit-box-orient: vertical;
+                                                    overflow: hidden;" class="fw-bolder">
+                                            ${cc.tensach}
+                                        </h5>
+                                        <!-- Product reviews-->
+                                        <div class="d-flex justify-content-center small text-warning mb-2">
+                                            <div class="bi-star-fill"></div>
+                                            <div class="bi-star-fill"></div>
+                                            <div class="bi-star-fill"></div>
+                                            <div class="bi-star-fill"></div>
+                                            <div class="bi-star-fill"></div>
+                                        </div>
+                                        <!-- Product price-->
+                                        <span class="text-muted text-decoration-line-through"><fmt:formatNumber pattern="###,###" value="${cc.giaban}" />₫</span>
+                                        <fmt:formatNumber pattern="###,###" value="${cc.giaban - cc.giaban*cc.giamgia/100}" />₫
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </c:if>
+            </c:forEach>
+        </div>
+    </div>
+</section>

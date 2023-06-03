@@ -1,0 +1,56 @@
+﻿@model Configsweb
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v16.0&appId=308936717220243&autoLogAppEvents=1" nonce="ZOXUagts"></script>
+<footer class="footer-distributed">
+
+    <div class="footer-left">
+
+        <h3><span>@Model.Tenweb</span></h3>
+
+        <p class="footer-links">
+            <a href="#" class="link-1">DỊCH VỤ</a>
+
+            <a href="#">HỖ TRỢ</a>
+
+            <a href="#">VẬN CHUYỂN</a>
+
+            <a href="#">LIÊN HỆ</a>
+        </p>
+
+        <p class="footer-company-name">Company Name © 2015</p>
+    </div>
+
+    <div class="footer-center">
+
+        <div>
+            <i class="fa fa-map-marker"></i>
+            <p><span>@Model.DiachiDuong</span> @Model.DiachiThanhpho</p>
+        </div>
+
+        <div>
+            <i class="fa fa-phone"></i>
+            <p>@Model.Phone</p>
+        </div>
+
+        <div>
+            <i class="fa fa-envelope"></i>
+            <p><a href="mailto:@Model.Email">@Model.Email</a></p>
+        </div>
+
+    </div>
+
+    <div class="footer-right">
+
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100084687950939" data-tabs="timeline" data-width="300" data-height="70" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="false"><blockquote cite="https://www.facebook.com/profile.php?id=100084687950939" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/profile.php?id=100084687950939">Phùng Kim Thông</a></blockquote></div>
+
+        <div class="footer-icons">
+
+            <a href="https://www.facebook.com/@Model.Facebook" target="_blank"><i class="fa fa-facebook"></i></a>
+            <a href="https://instagram.com/@Model.Instagram" target="_blank"><i class="fa fa-instagram"></i></a>
+            <a href="http://zalo.me/@Model.Zalo" target="_blank"><i class="fa fa-commenting-o"></i></a>
+
+        </div>
+
+    </div>
+
+</footer>

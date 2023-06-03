@@ -1,0 +1,278 @@
+﻿@using Microsoft.AspNetCore.Http
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/css/mdb.min.css" rel="stylesheet" />
+    <link href="~/css/_layout.css" rel="stylesheet" />
+    <script type="text/javascript" src="~/js/mdb.min.js"></script>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        #result{
+            width:270px;
+        }
+
+        .card:hover {
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            transform: translateY(-10px);
+        }
+
+        .card {
+            transition: 0.6s;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <!-- Container wrapper -->
+        <div class="container-fluid">
+            <!-- Toggle button -->
+            <button class="navbar-toggler"
+                    type="button"
+                    data-mdb-toggle="collapse"
+                    data-mdb-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <!-- Collapsible wrapper -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- Navbar brand -->
+                <a class="navbar-brand mt-2 mt-lg-0" href="/home">
+                    <img src="~/img/logo_1.png"
+                         height="20"
+                         alt="DB Logdo"
+                         loading="lazy" />
+                </a>
+                <!-- Left links -->
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="news.jsp">
+                            TIN TỨC
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">GIỚI THIỆU</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="tickets.jsp">HỖ TRỢ</a>
+                    </li>
+                </ul>
+                <!-- Left links -->
+            </div>
+            <!-- Collapsible wrapper -->
+            <!-- Right elements -->
+
+
+            <div class="d-flex align-items-center">
+
+                <div class="dropdown">
+                    <input id="searchMenu" onkeyup="showProductFilter()" class="text-reset me-3 dropdown-toggle hidden-arrow"
+                       type="search"
+                       id="navbarDropdownMenuLink"
+                       data-mdb-toggle="dropdown"
+                           placeholder="Tìm kiếm..."
+                       aria-expanded="false">
+                    </input>
+                    <ul id="result" class="dropdown-menu ">
+                        <a href="https://fb.com">
+                            <div class="card rounded-3 mb-3">
+                                <div class="card-body p-2">
+                                    <div class="row d-flex align-items-center">
+                                        <div class="col-md-3 col-lg-2 col-xl-3">
+                                            <img src="/img/anh-id5.webp"
+                                                 class="img-fluid rounded-3" alt="Cotton T-shirt">
+                                        </div>
+                                        <div class="col-xl-9">
+                                            <p style="display: -webkit-box;
+                                                                -webkit-line-clamp: 1;
+                                                                -webkit-box-orient: vertical;
+                                                                overflow: hidden;">Giảidsf mfdsffã dsfsd12 cddsfdssfdsfdsfdsfdsfdfdsfdshòm sao</p>
+                                            <div class="col-md-3 col-lg-8 col-xl-6 ">
+                                                <p style="font-weight: 600;
+                                                     color: #d51c24;" class="mb-0">190,000 ₫</p>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="https://fb.com">
+                            <div class="card rounded-3 mb-3">
+                                <div class="card-body p-2">
+                                    <div class="row d-flex align-items-center">
+                                        <div class="col-md-3 col-lg-2 col-xl-3">
+                                            <img src="/img/anh-id5.webp"
+                                                 class="img-fluid rounded-3" alt="Cotton T-shirt">
+                                        </div>
+                                        <div class="col-xl-9">
+                                            <p style="display: -webkit-box;
+                                                                -webkit-line-clamp: 1;
+                                                                -webkit-box-orient: vertical;
+                                                                overflow: hidden;">Giảidsf mfdsffã dsfsd12 cddsfdssfdsfdsfdsfdsfdfdsfdshòm sao</p>
+                                            <div class="col-md-3 col-lg-8 col-xl-6 ">
+                                                <p style="font-weight: 600;
+                                                     color: #d51c24;" class="mb-0">190,000 ₫</p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="https://fb.com">
+                            <div class="card rounded-3 mb-3">
+                                <div class="card-body p-2">
+                                    <div class="row d-flex align-items-center">
+                                        <div class="col-md-3 col-lg-2 col-xl-3">
+                                            <img src="/img/anh-id5.webp"
+                                                 class="img-fluid rounded-3" alt="Cotton T-shirt">
+                                        </div>
+                                        <div class="col-xl-9">
+                                            <p style="display: -webkit-box;
+                                                                -webkit-line-clamp: 1;
+                                                                -webkit-box-orient: vertical;
+                                                                overflow: hidden;">Giảidsf mfdsffã dsfsd12 cddsfdssfdsfdsfdsfdsfdfdsfdshòm sao</p>
+                                            <div class="col-md-3 col-lg-8 col-xl-6 ">
+                                                <p style="font-weight: 600;
+                                                     color: #d51c24;" class="mb-0">190,000 ₫</p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </ul>
+                </div>
+
+                @*<form class="d-flex input-group w-auto">
+                    <input type="search"
+                           class="form-control rounded"
+                           placeholder="Search"
+                           aria-label="Search"
+                           aria-describedby="search-addon" />
+                    <span class="input-group-text border-0" id="search-addon">
+                        <i class="fas fa-search"></i>
+                    </span>
+                </form>*@
+
+                @await Component.InvokeAsync("CategoryMenu")
+                <!-- Icon -->
+                <a class="text-reset me-3" href="~/home/cart">
+                    <i class="fas fa-shopping-cart"></i>
+                </a>
+
+                <!-- Notifications -->
+                <div class="dropdown">
+                    <a class="text-reset me-3 dropdown-toggle hidden-arrow"
+                       href=""
+                       id="navbarDropdownMenuLink"
+                       role="button"
+                       data-mdb-toggle="dropdown"
+                       aria-expanded="false">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge rounded-pill badge-notification bg-danger">1</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end"
+                        aria-labelledby="navbarDropdownMenuLink">
+                        <li>
+                            <a class="dropdown-item" href="#">Some news</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#">Another news</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Avatar -->
+                <div class="dropdown">
+                    <a class="text-reset me-3 dropdown-toggle hidden-arrow"
+                       href="#"
+                       id="navbarDropdownMenuAvatar"
+                       role="button"
+                       data-mdb-toggle="dropdown"
+                       aria-expanded="false">
+                        <i class="fa-solid fa-user"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end"
+                        aria-labelledby="navbarDropdownMenuAvatar">
+                        <li>
+                            <a class="dropdown-item" href="~/account">Thông tin cá nhân</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="~/account/order/">Lịch sử mua hàng</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="">Đăng nhập</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#">Đăng xuất</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Right elements -->
+        </div>
+        <!-- Container wrapper -->
+    </nav>
+    <!-- Navbar -->
+
+    
+    <div>
+        @RenderBody()
+    </div>
+
+    @await Component.InvokeAsync("Configsweb")
+
+    <button style="position: fixed;
+                bottom: 20px;
+                right: 20px;
+z-index:1;
+                display: none;"
+            type="button"
+            class="btn btn-danger btn-floating btn-lg"
+            id="btn-back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+</body>
+<script type="text/javascript">
+
+    let mybutton = document.getElementById("btn-back-to-top");
+
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function () {
+        scrollFunction();
+    };
+
+    function scrollFunction() {
+        if (
+            document.body.scrollTop > 100 ||
+            document.documentElement.scrollTop > 100
+        ) {
+            mybutton.style.display = "block";
+        } else {
+            mybutton.style.display = "none";
+        }
+    }
+    // When the user clicks on the button, scroll to the top of the document
+    mybutton.addEventListener("click", backToTop);
+
+    function backToTop() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+
+</script>
+
+</html>

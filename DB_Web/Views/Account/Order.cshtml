@@ -1,0 +1,45 @@
+﻿@{
+    Layout = "~/Views/Home/Shared/_Layout.cshtml";
+    ViewBag.Title = "Lịch sử mua hàng";
+}
+<header class="bg-dark py-5">
+    <div id="carouselExampleIndicators" class="carousel slide" data-mdb-ride="carousel">
+        <div class="carousel-indicators">
+        </div>
+        <div class="carousel-inner">
+        </div>
+    </div>
+</header>
+
+<section class="py-5">
+    <div class="container">
+        <a href="~/home">
+            <small><i class='fa fa-long-arrow-left'></i>&nbsp;Trở lại trang chủ</small>
+        </a>
+
+        <h2>Lịch sử mua hàng</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Đơn hàng</th>
+                    <th>Ngày</th>
+                    <th>Trạng thái đơn hàng</th>
+                    <th>Tổng</th>
+                    <th>Chi tiết</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <c:forEach items="${requestScope.listorder}" var="order">
+                    <tr>
+                        <td>ĐB-${order.ID}</td>
+                        <td>${order.thoigian}</td>
+                        <td>${order.status.mota}</td>
+                        <td><fmt:formatNumber pattern="###,###" value="${order.total}" />đ</td>
+                        <td style="text-align: center;"><a href="~/account/order/detail/{id}"><i class='fas fa-eye' style='font-size:30px'></i></a></td>
+                    </tr>
+                </c:forEach>
+            </tbody>
+        </table>
+    </div>
+</section>

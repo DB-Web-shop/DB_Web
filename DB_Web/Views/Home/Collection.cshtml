@@ -1,0 +1,180 @@
+﻿@{
+    Layout = "~/Views/Home/Shared/_Layout.cshtml";
+    var msp = ViewBag.msp;
+    double giagiam = 0;
+}
+@using X.PagedList.Mvc.Core;
+@model X.PagedList.IPagedList<Book>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Thanh toán</title>
+       <style>
+        .searchbar {
+            margin-bottom: auto;
+            margin-top: auto;
+            height: 50px;
+            background-color: #353b48;
+            border-radius: 20px;
+            padding: 6px;
+        }
+
+        .search_input {
+            color: white;
+            border: 0;
+            outline: 0;
+            background: none;
+            width: 0;
+            line-height: 30px;
+            transition: width 0.4s linear;
+        }
+
+        .searchbar:hover > .search_input {
+            /*padding: 0 10px;*/
+            width: 200px;
+            caret-color: red;
+            transition: width 0.4s linear;
+        }
+
+        .searchbar:hover > .search_icon {
+            background: white;
+            color: #e74c3c;
+        }
+
+        .search_icon {
+            height: 40px;
+            width: 40px;
+            float: right;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+        }
+
+        .bloc_left_price {
+            color: #c01508;
+            text-align: center;
+            font-weight: bold;
+            font-size: 150%;
+        }
+
+        .category_block li:hover {
+            background-color: #007bff;
+        }
+
+        .category_block a:hover .list-group-item {
+            color: #ffffff;
+        }
+
+        .category_block li a {
+            color: #343a40;
+        }
+
+        .add_to_cart_block .price {
+            color: #c01508;
+            text-align: center;
+            font-weight: bold;
+            font-size: 200%;
+            margin-bottom: 0;
+        }
+
+        .add_to_cart_block .price_discounted {
+            color: #343a40;
+            text-align: center;
+            text-decoration: line-through;
+            font-size: 140%;
+        }
+
+        .pagination {
+            margin-top: 20px;
+            list-style: none;
+
+        }
+        .pagination li{
+                box-sizing: border-box;
+                color: gray;
+                text-align: center;
+                display: inline-block;
+                width: 40px;
+                height: 40px;
+                line-height: 40px;
+                border-radius: 50%;
+                border: 1px solid #e6e6e6;
+                margin-left: 10px;
+        }
+        .clmm {
+            width: 47%;
+        }
+
+        .btn-block {
+            --mdb-btn-margin-top: 0;
+        }
+    </style>
+</head>
+
+@await Component.InvokeAsync("Carousel")
+
+<div style="width: fit-content;
+             margin-left: 4%;
+             margin-top: 3%;">
+    <a style="text-decoration: none; cursor: pointer; color: #386bc0" onclick="history.back()">
+        <h6><i class="fa fa-long-arrow-left"></i>&nbsp;Trở lại</h6>
+    </a>
+</div>
+
+<div style="margin-top:5%" class="container">
+    <div class="row">
+
+        @await Component.InvokeAsync("CategoryNavbar")
+
+
+        <div class="col">
+            <div class="row">
+                <h4 style="margin-bottom: 3%">@msp</h4>
+                @if(Model.Count == 0)
+                {
+                    <h1 id="noti">Không có kết quả nào</h1>
+                }
+                
+                @foreach (var book in Model)
+                {
+                    giagiam = (double)(book.Giaban - (book.Giaban * book.Giamgia / 100));
+                    <div style="margin-bottom: 5%;" class="col-12 col-md-6 col-lg-4 item">
+                        <a href="product?masp=@book.Id">
+
+                            <div class="card">
+                                <img style="height: 0%;" class="card-img-top" src="~/@book.Image" alt="@book.Tensach" >
+                                <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">-@book.Giamgia%</div>
+                                <div class="card-body">
+                                    <h5 style="display: -webkit-box;
+                                                    -webkit-line-clamp: 2;
+                                                    -webkit-box-orient: vertical;
+                                                    overflow: hidden;" class="card-title">
+                                        @book.Tensach
+                                    </h5>
+                                    <div class="row">
+                                        <div style="display: flex;
+                                                         justify-content: space-between;" class="col">
+                                            <p class="clmm btn btn-danger text-decoration-line-through" style="color: white;--mdb-btn-margin-top: 0;" >@book.Giaban.ToString("###,###")₫</p>
+                                            <p class="clmm btn btn-success ">@giagiam.ToString("###,###")₫</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+
+                    </div>
+                }
+                <div id="paging" class="col-12 d-flex justify-content-center ">
+                    @Html.PagedListPager(Model, page=>Url.Action("collection",new{page=page}))
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    
+</div>
+
+
