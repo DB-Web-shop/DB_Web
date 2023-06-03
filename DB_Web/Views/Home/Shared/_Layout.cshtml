@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
+    <title>@ViewData["Title"]</title>
     <link href="~/css/mdb.min.css" rel="stylesheet" />
     <link href="~/css/_layout.css" rel="stylesheet" />
     <script type="text/javascript" src="~/js/mdb.min.js"></script>
@@ -74,7 +74,7 @@
             <div class="d-flex align-items-center">
 
                 <div class="dropdown">
-                    <input id="searchMenu" onkeyup="showProductFilter()" class="text-reset me-3 dropdown-toggle hidden-arrow"
+                    <input id="searchMenu" onkeyup="searchProduct()" class="text-reset me-3 dropdown-toggle hidden-arrow"
                        type="search"
                        id="navbarDropdownMenuLink"
                        data-mdb-toggle="dropdown"
@@ -82,7 +82,7 @@
                        aria-expanded="false">
                     </input>
                     <ul id="result" class="dropdown-menu ">
-                        <a href="https://fb.com">
+                        @*<a href="https://fb.com">
                             <div class="card rounded-3 mb-3">
                                 <div class="card-body p-2">
                                     <div class="row d-flex align-items-center">
@@ -150,7 +150,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </a>
+                        </a>*@
                     </ul>
                 </div>
 
@@ -185,7 +185,7 @@
                     <ul class="dropdown-menu dropdown-menu-end"
                         aria-labelledby="navbarDropdownMenuLink">
                         <li>
-                            <a class="dropdown-item" href="#">Some news</a>
+                            <a onclick="searchProduct()" class="dropdown-item">Some news</a>
                         </li>
                         <li>
                             <a class="dropdown-item" href="#">Another news</a>
@@ -235,6 +235,10 @@
 
     @await Component.InvokeAsync("Configsweb")
 
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
     <button style="position: fixed;
                 bottom: 20px;
                 right: 20px;
@@ -274,5 +278,112 @@ z-index:1;
     }
 
 </script>
+<script>
+    //function searchProduct() {
+    //    var search, count = 0, txtValue;
+    //    search = document.getElementById("searchMenu");
+    //    if (search !== '' || search !== null) {
+    //        show.style.width = "200px";
+    //        filter = search.value.toUpperCase();
+    //        li = document.getElementsByClassName("item");
+    //        for (i = 0; i < li.length; i++) {
+    //            a = li[i].getElementsByTagName("h5")[0];
+    //            txtValue = a.textContent || a.innerText;
+    //            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+    //                count++;
+    //                li[i].style.display = "";
+    //            } else {
+    //                li[i].style.display = "none";
+    //            }
+    //        }
+    //        if (count === 0) {
+    //            pagination.style.display = "none";
+    //        }
+    //    }
+
+    //}
+    function searchProduct() {
+        const VND = new Intl.NumberFormat('vi-VN', {
+            style: 'currency',
+            currency: 'VND',
+        });
+        var search, count = 0, txtValue;
+        search = document.getElementById("searchMenu");
+        filter = search.value.toUpperCase();
+        var result = '';
+        $.ajax({
+            url: "@Url.Action("FindBooks")",
+            dataType: "json",
+            type: "GET",
+            data: { query: filter },
+            success: function (data) {
+                $.each(data, function (key, val) {
+                    count++;
+                    if (count<4){
+                        result += '<a href="home/product?masp=' + val.id + '">';
+                        result += '<div class="card rounded-3 mb-3" >';
+                        result += '<div class="card-body p-2" >';
+                        result += '<div class="row d-flex align-items-center" >';
+                        result += '<div class="col-md-3 col-lg-2 col-xl-3" >';
+                        result += '<img src="/' + val.image + '"';
+                        result += 'class= "img-fluid rounded-3" alt = "' + val.tensach + '" ></div>';
+                        result += '<div class="col-xl-9" >';
+                        result += '<p style="display: -webkit-box;';
+                        result += '-webkit-line-clamp: 1;';
+                        result += '-webkit-box-orient: vertical;';
+                        result += 'overflow: hidden; ">' + val.tensach + '</p>';
+                        result += '<div class="col-md-3 col-lg-8 col-xl-6 " >';
+                        result += '<p style="font-weight: 600;';
+                        let giagiam = (val.giamgia !== null) ? (val.giaban - (val.giaban * val.giamgia / 100)) : val.giaban;
+                        result += 'color: #d51c24; " class="mb-0">' + VND.format(giagiam) + '</p>';
+                        result += '</div></div></div> </div></div></a>';
+                    }
+                });
+                $('#result').html('');
+                $('#result').html(result);
+                
+            },
+            error: function (xhr) {
+                alert('cc');
+            }
+        });
+    }
+    //$(document).ready(function () {
+        
+    //    var result='';
+    //    $.ajax({
+    //        url: "@Url.Action("FindBooks")",
+    //        dataType: "json",
+    //        type: "GET",
+    //        data: { query: "ho" },
+    //        success: function (data) {
+    //            $.each(data, function(key, val){
+    //                result += '<a href="">';
+    //                result += '<div class="card rounded-3 mb-3" >';
+    //                result += '<div class="card-body p-2" >';
+    //                result += '<div class="row d-flex align-items-center" >';
+    //                result += '<div class="col-md-3 col-lg-2 col-xl-3" >';
+    //                result += '<img src="' + val.image + '"';
+    //                result += 'class= "img-fluid rounded-3" alt = "' + val.tensach + '" ></div>';
+    //                result += '<div class="col-xl-9" >';
+    //                result += '<p style="display: -webkit-box;';
+    //                result += '-webkit-line-clamp: 1;';
+    //                result += '-webkit-box-orient: vertical;';
+    //                result += 'overflow: hidden; ">' + val.tensach + '</p>';
+    //                result += '<div class="col-md-3 col-lg-8 col-xl-6 " >';
+    //                result += '<p style="font-weight: 600;';
+    //                result += 'color: #d51c24; " class="mb- ">' + val.giaban + '₫</p>';
+    //                result += '</div></div></div> </div></div></a>';
+    //            });
+    //            $('#result').html(result);
+    //        },
+    //        error: function (xhr) {
+    //            alert('cc');
+    //        }
+    //    });
+    //})
+
+</script>
+
 
 </html>

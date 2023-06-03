@@ -65,7 +65,7 @@ namespace DB_Web.Controllers.General
             PagedList<Book> list = new PagedList<Book>(lb, pageNum, pageSize);
             return View(list);
         }
-        [HttpGet()]
+        [HttpGet]
         public IEnumerable<Book>? FindBooks(string query)
         {
             if (query != null)
